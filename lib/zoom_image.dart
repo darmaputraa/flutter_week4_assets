@@ -26,9 +26,37 @@ class _ZoomImageState extends State<ZoomImage> {
                   bottomLeft: Radius.circular(32),
                   bottomRight: Radius.circular(32)),
             )),
-        body: Center(
-            child: CarouselSlider(items: [
-          Image.network(widget.urlImage),
-        ], options: CarouselOptions(height: 300, enlargeCenterPage: true))));
+        body: Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CarouselSlider(
+                    items: [
+                      SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Image.network(widget.urlImage),
+                            const SizedBox(height: 20),
+                            Text(
+                              widget.urlImage.toString(),
+                              style: const TextStyle(color: Colors.amber),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                    options: CarouselOptions(
+                        height: 400,
+                        autoPlay: true,
+                        autoPlayCurve: Curves.decelerate,
+                        viewportFraction: 0.6,
+                        enlargeCenterPage: true)),
+              ],
+            ),
+          ),
+        ));
   }
 }
